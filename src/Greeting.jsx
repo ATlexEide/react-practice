@@ -1,10 +1,10 @@
 function Greeting() {
-  return <p>This is a very nice JSX greeting</p>;
+  return <p className="introduction">This is a very nice JSX greeting</p>;
 }
 function Header() {
   return (
     <header>
-      <h1>Header</h1>
+      <h1 id="main-header">Header</h1>
     </header>
   );
 }
