@@ -5,7 +5,7 @@ export function List(props) {
   return (
     <ul>
       {props.animals.map((animal) => {
-        return <ListElement animal={animal} />;
+        return <ListElement key={animal} animal={animal} />;
       })}
     </ul>
   );
