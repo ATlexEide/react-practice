@@ -1,7 +1,15 @@
-export function Test() {
-  const animals = ["animal 1", "animal 2", "animal 3"];
-  const list = animals.map((animal) => {
-    return <li key={animal}>{animal}</li>;
-  });
-  return <ul>{list}</ul>;
+function ListElement(props) {
+  return <li>{props.animal}</li>;
+}
+export function List(props) {
+  return (
+    <ul>
+      {props.animals.map((animal) => {
+        return <ListElement animal={animal} />;
+      })}
+    </ul>
+  );
+}
+export function FullList(props) {
+  return <List animals={props.animals} />;
 }
