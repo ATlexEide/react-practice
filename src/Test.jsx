@@ -1,13 +1,10 @@
 export function Test() {
+  const animals = ["animal 1", "animal 2", "animal 3"];
   return (
-    <div>
-      <h1>Test title</h1>
-      <svg>
-        <circle cx="25" cy="75" r="20" stroke="green" strokeWidth="2" />
-      </svg>
-      <form>
-        <input type="text" />
-      </form>
-    </div>
+    <ul>
+      {animals.map((animal) => {
+        return <li key={animal}>{animal}</li>;
+      })}
+    </ul>
   );
 }
