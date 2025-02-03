@@ -1,13 +1,8 @@
 import "./App.css";
+import Person from "./Person";
 
 function App() {
-  return (
-    <>
-      <div>
-        <h1>Hello world!</h1>
-      </div>
-    </>
-  );
+  return <Person />;
 }
 
 export default App;
