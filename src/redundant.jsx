@@ -1,29 +1,65 @@
 import { useState } from "react";
+import AddItem from "./AddItem.js";
+import PackingList from "./PackingList.js";
 
-export default function Form() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+let nextId = 3;
+const initialItems = [
+  { id: 0, title: "Warm socks", packed: true },
+  { id: 1, title: "Travel journal", packed: false },
+  { id: 2, title: "Watercolors", packed: false },
+];
 
-  function handleFirstNameChange(e) {
-    setFirstName(e.target.value);
+export default function TravelPlan() {
+  const [items, setItems] = useState(initialItems);
+  const [total, setTotal] = useState(3);
+  const [packed, setPacked] = useState(1);
+
+  function handleAddItem(title) {
+    setTotal(total + 1);
+    setItems([
+      ...items,
+      {
+        id: nextId++,
+        title: title,
+        packed: false,
+      },
+    ]);
   }
 
-  function handleLastNameChange(e) {
-    setLastName(e.target.value);
+  function handleChangeItem(nextItem) {
+    if (nextItem.packed) {
+      setPacked(packed + 1);
+    } else {
+      setPacked(packed - 1);
+    }
+    setItems(
+      items.map((item) => {
+        if (item.id === nextItem.id) {
+          return nextItem;
+        } else {
+          return item;
+        }
+      })
+    );
+  }
+
+  function handleDeleteItem(itemId) {
+    setTotal(total - 1);
+    setItems(items.filter((item) => item.id !== itemId));
   }
 
   return (
     <>
-      <h2>Let’s check you in</h2>
-      <label>
-        First name: <input value={firstName} onChange={handleFirstNameChange} />
-      </label>
-      <label>
-        Last name: <input value={lastName} onChange={handleLastNameChange} />
-      </label>
-      <p>
-        Your ticket will be issued to: <b>{`${firstName} ${lastName}`}</b>
-      </p>
+      <AddItem onAddItem={handleAddItem} />
+      <PackingList
+        items={items}
+        onChangeItem={handleChangeItem}
+        onDeleteItem={handleDeleteItem}
+      />
+      <hr />
+      <b>
+        {packed} out of {total} packed!
+      </b>
     </>
   );
 }
